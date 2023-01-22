@@ -9,6 +9,8 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import javax.swing.JOptionPane;
+import javax.swing.SwingWorker;
 
 /**
  *
@@ -23,14 +25,13 @@ public class GirisEkrani extends javax.swing.JFrame {
     //Dğişkenler
     public Integer posX;
     public Integer posY;
-    
-    
+
     /**
      * Creates new form GirisEkrani
      */
     public GirisEkrani() {
         initComponents();
-        initComponentsGiris(false);
+        this.setLocation(dimension.width / 2 - this.getSize().width / 2, dimension.height / 2 - this.getSize().height / 2);
     }
 
     public void initComponentsGiris(boolean acilis) {
@@ -41,15 +42,12 @@ public class GirisEkrani extends javax.swing.JFrame {
         if (acilis) {
             jLabel_UserIkon.setIcon(renkVeIconlar.getUserWarning());
         } else {
-            jLabel_UserIkon.setIcon(renkVeIconlar.getUser());
-
-            this.setLocation(dimension.width / 2 - this.getSize().width / 2, dimension.height / 2 - this.getSize().height / 2);
+            jLabel_UserIkon.setIcon(renkVeIconlar.getUser()); 
         }
-
+        
         jLabel_KurtarmaMesaji.setVisible(acilis);
         jLabel_Sayac.setVisible(acilis);
         jTextField_KurtarmaKodu.setVisible(acilis);
-
     }
 
     /**
@@ -63,7 +61,7 @@ public class GirisEkrani extends javax.swing.JFrame {
 
         jPanel_AnaPanel = new javax.swing.JPanel();
         jPanel_GirisIkon = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        jLabel_GirisIkon = new javax.swing.JLabel();
         jPanel_GirisParametreleri = new javax.swing.JPanel();
         jPanel_Navigasyon = new javax.swing.JPanel();
         jLabel_Close = new javax.swing.JLabel();
@@ -73,7 +71,7 @@ public class GirisEkrani extends javax.swing.JFrame {
         jLabel_UserIkon = new javax.swing.JLabel();
         jLabel_KurtarmaMesaji = new javax.swing.JLabel();
         jLabel_Sayac = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
+        jPanel_GirisAlanlari = new javax.swing.JPanel();
         jTextField_KullaniciAdi = new javax.swing.JTextField();
         jPasswordField_Sifre = new javax.swing.JPasswordField();
         jTextField_KurtarmaKodu = new javax.swing.JTextField();
@@ -82,7 +80,6 @@ public class GirisEkrani extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(700, 500));
         setResizable(false);
 
         jPanel_AnaPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(0, 0, 0), new java.awt.Color(204, 204, 204)));
@@ -90,18 +87,18 @@ public class GirisEkrani extends javax.swing.JFrame {
 
         jPanel_GirisIkon.setPreferredSize(new java.awt.Dimension(350, 499));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/girisEkrani.png"))); // NOI18N
+        jLabel_GirisIkon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/girisEkrani.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel_GirisIkonLayout = new javax.swing.GroupLayout(jPanel_GirisIkon);
         jPanel_GirisIkon.setLayout(jPanel_GirisIkonLayout);
         jPanel_GirisIkonLayout.setHorizontalGroup(
             jPanel_GirisIkonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(jLabel_GirisIkon, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         jPanel_GirisIkonLayout.setVerticalGroup(
             jPanel_GirisIkonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel_GirisIkonLayout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addComponent(jLabel_GirisIkon, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addGap(0, 0, 0))
         );
 
@@ -193,7 +190,7 @@ public class GirisEkrani extends javax.swing.JFrame {
         jLabel_Sayac.setForeground(new java.awt.Color(32, 188, 233));
         jLabel_Sayac.setText("120");
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel_GirisAlanlari.setBackground(new java.awt.Color(255, 255, 255));
 
         jTextField_KullaniciAdi.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jTextField_KullaniciAdi.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Kullanıcı Adı", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
@@ -222,13 +219,13 @@ public class GirisEkrani extends javax.swing.JFrame {
         jButton_GirisYap.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/login.png"))); // NOI18N
         jButton_GirisYap.setText("Giriş");
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanel_GirisAlanlariLayout = new javax.swing.GroupLayout(jPanel_GirisAlanlari);
+        jPanel_GirisAlanlari.setLayout(jPanel_GirisAlanlariLayout);
+        jPanel_GirisAlanlariLayout.setHorizontalGroup(
+            jPanel_GirisAlanlariLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_GirisAlanlariLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                .addGroup(jPanel_GirisAlanlariLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jLabel_SifremiUnuttum, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField_KurtarmaKodu, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPasswordField_Sifre, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -236,9 +233,9 @@ public class GirisEkrani extends javax.swing.JFrame {
                     .addComponent(jButton_GirisYap, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        jPanel_GirisAlanlariLayout.setVerticalGroup(
+            jPanel_GirisAlanlariLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_GirisAlanlariLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jTextField_KullaniciAdi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -256,15 +253,17 @@ public class GirisEkrani extends javax.swing.JFrame {
         jPanel_GirisParametreleri.setLayout(jPanel_GirisParametreleriLayout);
         jPanel_GirisParametreleriLayout.setHorizontalGroup(
             jPanel_GirisParametreleriLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel_Navigasyon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addComponent(jPanel_KullaniciIkon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel_GirisAlanlari, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel_GirisParametreleriLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel_KurtarmaMesaji, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
-                .addComponent(jLabel_Sayac, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel_GirisParametreleriLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel_Navigasyon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel_GirisParametreleriLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel_KurtarmaMesaji, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(31, 31, 31)
+                        .addComponent(jLabel_Sayac, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel_GirisParametreleriLayout.setVerticalGroup(
             jPanel_GirisParametreleriLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -276,7 +275,7 @@ public class GirisEkrani extends javax.swing.JFrame {
                     .addComponent(jLabel_KurtarmaMesaji)
                     .addComponent(jLabel_Sayac))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel_GirisAlanlari, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0))
         );
 
@@ -287,7 +286,7 @@ public class GirisEkrani extends javax.swing.JFrame {
             .addGroup(jPanel_AnaPanelLayout.createSequentialGroup()
                 .addComponent(jPanel_GirisIkon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(jPanel_GirisParametreleri, javax.swing.GroupLayout.DEFAULT_SIZE, 346, Short.MAX_VALUE))
+                .addComponent(jPanel_GirisParametreleri, javax.swing.GroupLayout.PREFERRED_SIZE, 346, Short.MAX_VALUE))
         );
         jPanel_AnaPanelLayout.setVerticalGroup(
             jPanel_AnaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -310,6 +309,7 @@ public class GirisEkrani extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel_MinimizeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_MinimizeMouseEntered
@@ -346,16 +346,48 @@ public class GirisEkrani extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel_SifremiUnuttumMouseExited
 
     private void jLabel_SifremiUnuttumMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_SifremiUnuttumMouseClicked
-        initComponentsGiris(true);
+
+        String kullaniciAdi = jTextField_KullaniciAdi.getText();
+        kullaniciAdi = kullaniciAdi.replace(" ", "");
+        jTextField_KullaniciAdi.setText(kullaniciAdi);
+
+        if (!kullaniciAdi.equals("")) {
+            int dialogButton = JOptionPane.showConfirmDialog(this, "Kurtarma Kodu Mailiniz Gönderilsin mi?", "Uyarı", JOptionPane.YES_NO_OPTION);
+            if (dialogButton == 0) {
+                System.out.println("Kurtarma Kodu Mailinize Gönderiliyor");
+                initComponentsGiris(true);
+                
+                SwingWorker<Boolean, Integer> swingWorker = new SwingWorker<Boolean, Integer>() {
+
+                    @Override
+                    protected Boolean doInBackground() throws Exception {
+                        for (int i = 120; i >= 0; i--) {
+                            jLabel_Sayac.setText(String.valueOf(i));
+                            Thread.sleep(100);
+                        }
+                        return true;
+                    }
+
+                    @Override
+                    protected void done() {
+                        System.out.println("Süreniz Bitti");
+                        initComponentsGiris(false);
+                    }
+                };
+                swingWorker.execute();
+            }
+        } else {
+            JOptionPane.showConfirmDialog(this, "Kullanıcı Adı Girmediniz");
+        }
     }//GEN-LAST:event_jLabel_SifremiUnuttumMouseClicked
 
     private void jLabel_MoveMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_MoveMousePressed
-       posX=evt.getX();
-       posY=evt.getY();
+        posX = evt.getX();
+        posY = evt.getY();
     }//GEN-LAST:event_jLabel_MoveMousePressed
 
     private void jLabel_MoveMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_MoveMouseDragged
-        this.setLocation(evt.getXOnScreen()-posX-591, evt.getYOnScreen()-posY );
+        this.setLocation(evt.getXOnScreen() - posX - 591, evt.getYOnScreen() - posY);
     }//GEN-LAST:event_jLabel_MoveMouseDragged
 
     /**
@@ -395,16 +427,16 @@ public class GirisEkrani extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton_GirisYap;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel_Close;
+    private javax.swing.JLabel jLabel_GirisIkon;
     private javax.swing.JLabel jLabel_KurtarmaMesaji;
     private javax.swing.JLabel jLabel_Minimize;
     private javax.swing.JLabel jLabel_Move;
     private javax.swing.JLabel jLabel_Sayac;
     private javax.swing.JLabel jLabel_SifremiUnuttum;
     private javax.swing.JLabel jLabel_UserIkon;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel_AnaPanel;
+    private javax.swing.JPanel jPanel_GirisAlanlari;
     private javax.swing.JPanel jPanel_GirisIkon;
     private javax.swing.JPanel jPanel_GirisParametreleri;
     private javax.swing.JPanel jPanel_KullaniciIkon;
