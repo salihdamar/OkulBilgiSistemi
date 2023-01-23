@@ -6,6 +6,7 @@ package UserInterface;
 
 import ArayuzIslemleri.GirisEkranIslemleri;
 import ArayuzIslemleri.RenkVeIconlar;
+import Kullanicilar.Kullanici;
 import MailConfig.MailIslemleri;
 import SQLIslemleri.SQLKullaniciIslemleri;
 import java.awt.Color;
@@ -13,6 +14,7 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
+import java.sql.SQLException;
 import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,12 +28,14 @@ import javax.swing.SwingWorker;
  */
 public class GirisEkrani extends javax.swing.JFrame {
 
+    private String DB_KULLANICI = "kullanicilar";
+
     //Classlar
     RenkVeIconlar renkVeIconlar = new RenkVeIconlar();
     Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
-    
+
     MailIslemleri mailIslemleri = new MailIslemleri();
-    SQLKullaniciIslemleri sQLKullaniciIslemleri = new SQLKullaniciIslemleri(mailIslemleri);
+    SQLKullaniciIslemleri sQLKullaniciIslemleri = new SQLKullaniciIslemleri(mailIslemleri, DB_KULLANICI);
     GirisEkranIslemleri girisEkranIslemleri;
 
     //Dğişkenler
@@ -41,10 +45,6 @@ public class GirisEkrani extends javax.swing.JFrame {
     private boolean sayacDurdur = false;
     private boolean sifreSonuc = false;
 
-    //Değişkenler
-    public String kullaniciAdi = "eftelya";
-    public String kullaniciSifre = "123456";
-
     /**
      * Creates new form GirisEkrani
      */
@@ -53,17 +53,17 @@ public class GirisEkrani extends javax.swing.JFrame {
         initComponentsGiris(false);
         this.setLocation(dimension.width / 2 - this.getSize().width / 2, dimension.height / 2 - this.getSize().height / 2);
     }
-    
+
     public void initComponentsGiris(boolean acilis) {
-        
+
         jTextField_KullaniciAdi.setVisible(!acilis);
         jPasswordField_Sifre.setVisible(!acilis);
         jLabel_SifremiUnuttum.setVisible(!acilis);
-        
+
         jLabel_KurtarmaMesaji.setVisible(acilis);
         jLabel_Sayac.setVisible(acilis);
         jTextField_KurtarmaKodu.setVisible(acilis);
-        
+
         if (acilis) {
             jLabel_UserIkon.setIcon(renkVeIconlar.getUserWarning());
         } else {
@@ -397,54 +397,60 @@ public class GirisEkrani extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel_SifremiUnuttumMouseExited
 
     private void jLabel_SifremiUnuttumMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_SifremiUnuttumMouseClicked
-        
-        String kullaniciAdi = jTextField_KullaniciAdi.getText();
-        kullaniciAdi = kullaniciAdi.replace(" ", "");
-        jTextField_KullaniciAdi.setText(kullaniciAdi);
-        
-        if (!kullaniciAdi.equals("")) {
+
+        String girilenKullaniciAdi = jTextField_KullaniciAdi.getText();
+        girilenKullaniciAdi = girilenKullaniciAdi.replace(" ", "");
+        jTextField_KullaniciAdi.setText(girilenKullaniciAdi);
+        Kullanici kullanici;
+        boolean mailAdrsiBulunduMu = false;
+
+        if (!girilenKullaniciAdi.equals("")) {
             int dialogButton = JOptionPane.showConfirmDialog(this, "Kurtarma Kodu Mailiniz Gönderilsin mi?", "Uyarı", JOptionPane.YES_NO_OPTION);
             if (dialogButton == 0) {
-                initComponentsGiris(true);
-                
+
                 try {
-                    sQLKullaniciIslemleri.sifremiUnuttum(kullaniciAdi);
-                    System.out.println("kurtarma kodu" + mailIslemleri.getSifreKurtarmaKodu());
-                    
+                    kullanici = sQLKullaniciIslemleri.kullaniciBul(girilenKullaniciAdi);
+
+                    if (kullanici == null) {
+                        throw new NullPointerException();
+                    } else {
+                        initComponentsGiris(true);
+                        mailAdrsiBulunduMu = sQLKullaniciIslemleri.sifremiUnuttum(kullanici);
+                        SwingWorker<Boolean, Integer> swingWorker = new SwingWorker<Boolean, Integer>() {
+                            @Override
+                            protected Boolean doInBackground() throws Exception {
+                                for (int i = 120; i >= 0; i--) {
+                                    if (!sifreSonuc) {
+                                        jLabel_Sayac.setText(String.valueOf(i));
+                                        Thread.sleep(1000);
+                                    } else {
+                                        sayacDurdur = true;
+                                        return true;
+                                    }
+                                }
+                                return true;
+                            }
+
+                            @Override
+                            protected void done() {
+                                initComponentsGiris(false);
+                                if (!sayacDurdur) {
+                                    JOptionPane.showMessageDialog(GirisEkrani.this, "Süreniz Bitti");
+                                } else {
+                                    JOptionPane.showMessageDialog(GirisEkrani.this, "Kullanıcı Sifresi: " + kullanici.getKullaniciSifre());
+                                    jPasswordField_Sifre.setText(kullanici.getKullaniciSifre());
+                                }
+                            }
+                        };
+                        swingWorker.execute();
+                    }
                 } catch (MessagingException ex) {
                     Logger.getLogger(GirisEkrani.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (NullPointerException ex) {
+                    JOptionPane.showMessageDialog(this, "Girilen Kullanıcı Adı ile Kullanıcı Bulunamadı");
+                } catch (SQLException ex) {
+                    Logger.getLogger(GirisEkrani.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                
-                SwingWorker<Boolean, Integer> swingWorker = new SwingWorker<Boolean, Integer>() {
-                    
-                    @Override
-                    protected Boolean doInBackground() throws Exception {
-                        for (int i = 120; i >= 0; i--) {
-                            
-                            if (!sifreSonuc) {
-                                jLabel_Sayac.setText(String.valueOf(i));
-                                Thread.sleep(10);
-                            } else {
-                                sayacDurdur = true;
-                                return true;
-                            }                            
-                        }
-                        return true;
-                    }
-                    
-                    @Override
-                    protected void done() {
-                        initComponentsGiris(false);
-                        if (!sayacDurdur) {
-                            JOptionPane.showMessageDialog(GirisEkrani.this, "Süreniz Bitti");
-                        } else {
-                            JOptionPane.showMessageDialog(GirisEkrani.this, kullaniciSifre);
-                            jPasswordField_Sifre.setText(kullaniciSifre);
-                        }
-                        
-                    }
-                };
-                swingWorker.execute();
             }
         } else {
             JOptionPane.showMessageDialog(this, "Kullanıcı Adı Girmediniz");
@@ -461,24 +467,38 @@ public class GirisEkrani extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel_MoveMouseDragged
 
     private void jButton_GirisYapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_GirisYapActionPerformed
-        
+
         this.sifreKurtamaIslemleri = jTextField_KurtarmaKodu.isVisible();
         girisEkranIslemleri = new GirisEkranIslemleri(jTextField_KullaniciAdi, jTextField_KurtarmaKodu, jPasswordField_Sifre);
-        
         boolean girisIslemSonuc = false;
         boolean sifreIslemSonuc = false;
-        
+        String girilenKullaniciAdi = jTextField_KullaniciAdi.getText();
+        String girilenKullaniciSifre = new String(jPasswordField_Sifre.getPassword());
+        Kullanici kullanici;
         if (!sifreKurtamaIslemleri) {
-            girisIslemSonuc = girisEkranIslemleri.girisYap(kullaniciAdi, kullaniciSifre);
-            if (girisIslemSonuc) {
-                //Jframe Oluştur            
-            } else {
-                JOptionPane.showMessageDialog(this, girisEkranIslemleri.getSonucMesaj());
+            try {
+                girisIslemSonuc = girisEkranIslemleri.bosGirisKontrol();
+                if (girisIslemSonuc) {
+                    kullanici = sQLKullaniciIslemleri.KullaniciBul(girilenKullaniciAdi, girilenKullaniciSifre);
+                    if (kullanici == null) {
+                        throw new NullPointerException();
+                    } else {
+                        this.setVisible(false);
+                        OBSUI obsui = new OBSUI(kullanici);
+                        obsui.setVisible(true);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(this, girisEkranIslemleri.getSonucMesaj());
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(GirisEkrani.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (NullPointerException ex) {
+                JOptionPane.showMessageDialog(this, "Hatalı Kullanıcı Adı veya Şifresi Girdiniz.");
             }
         } else {
             sifreIslemSonuc = girisEkranIslemleri.sifreKurtar(mailIslemleri.getSifreKurtarmaKodu());
             JOptionPane.showMessageDialog(this, girisEkranIslemleri.getSonucMesaj());
-            
+
             if (sifreIslemSonuc) {
                 this.sifreSonuc = true;
             } else {
@@ -488,18 +508,16 @@ public class GirisEkrani extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton_GirisYapActionPerformed
 
     private void jPanel_AnaPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel_AnaPanelMousePressed
-        
+
         posX = evt.getX();
         posY = evt.getY();
     }//GEN-LAST:event_jPanel_AnaPanelMousePressed
 
     private void jPanel_AnaPanelMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel_AnaPanelMouseDragged
         this.setLocation(evt.getXOnScreen() - posX, evt.getYOnScreen() - posY);
-
     }//GEN-LAST:event_jPanel_AnaPanelMouseDragged
 
     private void jTextField_KullaniciAdiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField_KullaniciAdiKeyPressed
-        
         if (KeyEvent.VK_ENTER == evt.getKeyChar()) {
             jButton_GirisYap.doClick();
         }

@@ -23,10 +23,6 @@ public class GirisEkranIslemleri {
     private String girilenKurtarmaKodu;
 
     private String sonucMesaj;
-
-    private String sonucGiris_BosAlan;
-    private String sonucGiris_Mesaj;
-
     private String sonucKurtarma_BosAlan;
     private String sonucKurtarma_Mesaj;
 
@@ -40,15 +36,17 @@ public class GirisEkranIslemleri {
         this.girilenKurtarmaKodu = jTextField_KurtarmaKodu.getText();
     }
 
-    public boolean girisYap(String kullaniciAdi, String kullaniciSifre) {
-        boolean bosAlanKontrol = bosGirisKontrol();
-        boolean alanKontrol = girisKontrol(kullaniciAdi, kullaniciSifre);
+    public boolean bosGirisKontrol() {
 
-        if (!bosAlanKontrol) {
-            this.sonucMesaj = this.sonucGiris_BosAlan;
+        if (girilenKullaniciAdi.equals("") && girilenSifre.equals("")) {
+            this.sonucMesaj = "Kullanıcı Adını ve Şifresini Giriniz";
             return false;
-        } else if (!alanKontrol) {
-            this.sonucMesaj = this.sonucGiris_Mesaj;
+
+        } else if (girilenKullaniciAdi.equals("")) {
+            this.sonucMesaj = "Kullanıcı Adını  Giriniz";
+            return false;
+        } else if (girilenSifre.equals("")) {
+            this.sonucMesaj = "Kullanıcı  Şifresini Giriniz";
             return false;
         } else {
             this.sonucMesaj = "Başarılı";
@@ -56,35 +54,6 @@ public class GirisEkranIslemleri {
         }
     }
 
-    protected boolean bosGirisKontrol() {
-
-        if (girilenKullaniciAdi.equals("") && girilenSifre.equals("")) {
-            this.sonucGiris_BosAlan = "Kullanıcı Adını ve Şifresini Giriniz";
-            return false;
-
-        } else if (girilenKullaniciAdi.equals("")) {
-            this.sonucGiris_BosAlan = "Kullanıcı Adını  Giriniz";
-            return false;
-        } else if (girilenSifre.equals("")) {
-            this.sonucGiris_BosAlan = "Kullanıcı  Şifresini Giriniz";
-            return false;
-        } else {
-            this.sonucGiris_BosAlan = "Başarılı";
-            return true;
-        }
-    }
-
-    protected boolean girisKontrol(String kullaniciAdi, String kullaniciSifre) {
-
-        if (girilenKullaniciAdi.equals(kullaniciAdi) && Objects.equals(girilenSifre, kullaniciSifre)) {
-            this.sonucGiris_Mesaj = "Başarılı";
-            return true;
-
-        } else {
-            this.sonucGiris_Mesaj = "Kullanıcı Adınız ve Şifreniz Yanlış Girildi";
-            return false;
-        }
-    }
 
     public boolean sifreKurtar(String kurtarmaKodu) {
         boolean bosAlanKontrol = bosKurtarmaKoduKontrol();
@@ -127,5 +96,5 @@ public class GirisEkranIslemleri {
     public String getSonucMesaj() {
         return sonucMesaj;
     }
-    
+
 }
