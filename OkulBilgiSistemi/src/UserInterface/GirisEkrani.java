@@ -51,6 +51,9 @@ public class GirisEkrani extends javax.swing.JFrame {
     public GirisEkrani() {
         initComponents();
         initComponentsGiris(false);
+        jTextField_KullaniciAdi.setText("eftelya");
+        jPasswordField_Sifre.setText(new String("123456"));
+        
         this.setLocation(dimension.width / 2 - this.getSize().width / 2, dimension.height / 2 - this.getSize().height / 2);
     }
 

@@ -4,11 +4,17 @@
  */
 package UserInterface;
 
+import ArayuzIslemleri.OBSEkranIslemleri;
 import Kullanicilar.Admin;
 import Kullanicilar.Kullanici;
 import Kullanicilar.Ogrenci;
 import Kullanicilar.Ogretmen;
 import Kullanicilar.OkulMuduru;
+import Paneller.PanelAtama;
+import Paneller.PanelKullanici;
+import Paneller.PanelOkul;
+import Paneller.PanelSinav;
+import Paneller.PanelSinif;
 import javax.swing.DefaultListModel;
 
 /**
@@ -16,32 +22,32 @@ import javax.swing.DefaultListModel;
  * @author Elif Eftelya
  */
 public class OBSUI extends javax.swing.JFrame {
-    
+
     Admin admin;
     Ogrenci ogrenci;
     Ogretmen ogretmen;
     OkulMuduru okulMuduru;
-    
-    DefaultListModel modelTumOkullar= new DefaultListModel();
-    
-    
+
+    DefaultListModel modelTumOkullar = new DefaultListModel();
+    OBSEkranIslemleri oBSEkranIslemleri;
+    PanelAtama panelAtama;
+    PanelSinif panelSinif;
+    PanelSinav panelSinav;
+    PanelOkul panelOkul;
+    PanelKullanici panelKullanici;
 
     /**
      * Creates new form OBSUI
      */
     public OBSUI() {
         initComponents();
-        jPanel_Kullanici.setVisible(false);
-        jPanel_Okul.setVisible(false);
-        jPanel_Ogretmen.setVisible(false);
-        jPanel_Sinif.setVisible(false);
-        jPanel_Sinav.setVisible(true);
-        
+
     }
-    
+
     public OBSUI(Kullanici kullanici) {
         initComponents();
-        
+        initComponent_Panel(kullanici);
+
         switch (kullanici.getRole()) {
             case "Admin" ->
                 admin = (Admin) kullanici;
@@ -54,7 +60,18 @@ public class OBSUI extends javax.swing.JFrame {
             default ->
                 kullanici = null;
         }
-        
+
+    }
+
+    public void initComponent_Panel(Kullanici kullanici) {
+        panelKullanici = new PanelKullanici(jToggleButton_Kullanici, jPanel_Kullanici);
+        panelAtama = new PanelAtama(jToggleButton_Atama, jPanel_Atama);
+        panelSinav = new PanelSinav(jToggleButton_Sinav, jPanel_Sinav);
+        panelSinif = new PanelSinif(jToggleButton_Sinif, jPanel_Sinif);
+        panelOkul = new PanelOkul(jToggleButton_Okul, jPanel_Okul);
+
+        oBSEkranIslemleri = new OBSEkranIslemleri(panelKullanici, panelAtama, panelSinav, panelSinif, panelOkul, kullanici);
+        oBSEkranIslemleri.initComponet_UI();
     }
 
     /**
@@ -80,43 +97,44 @@ public class OBSUI extends javax.swing.JFrame {
         jPanel_AnaPanel = new javax.swing.JPanel();
         jPanel_MenuBar = new javax.swing.JPanel();
         jToggleButton_Okul = new javax.swing.JToggleButton();
-        jToggleButton_Ogretmen = new javax.swing.JToggleButton();
+        jToggleButton_Atama = new javax.swing.JToggleButton();
         jToggleButton_Sinif = new javax.swing.JToggleButton();
         jToggleButton_Sinav = new javax.swing.JToggleButton();
         jToggleButton_Kullanici = new javax.swing.JToggleButton();
+        jButton7 = new javax.swing.JButton();
         jPanel_Header2 = new javax.swing.JPanel();
         jPanel_Footer = new javax.swing.JPanel();
         jPanel_CardBody = new javax.swing.JPanel();
         jPanel_Kullanici = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
+        jTextField_SoyIsim = new javax.swing.JTextField();
+        jTextField_KullaniciAdi = new javax.swing.JTextField();
+        jTextField_KullaniciSifre = new javax.swing.JTextField();
+        jTextField_EMail = new javax.swing.JTextField();
+        jTextField_Isim = new javax.swing.JTextField();
         jButton_Yenile = new javax.swing.JButton();
         jButton_Kayit = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jSpinner1 = new javax.swing.JSpinner();
+        jComboBox_Role = new javax.swing.JComboBox<>();
+        jSpinner_Yas = new javax.swing.JSpinner();
         jPanel6 = new javax.swing.JPanel();
-        jPanel8 = new javax.swing.JPanel();
+        jPanel_OgretmenlikEkBilgiler = new javax.swing.JPanel();
         jPanel10 = new javax.swing.JPanel();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jSpinner2 = new javax.swing.JSpinner();
+        jComboBox_OgretmenlikBaslamaYili = new javax.swing.JComboBox<>();
+        jSpinner_AtamaPuan = new javax.swing.JSpinner();
         jPanel11 = new javax.swing.JPanel();
-        jComboBox3 = new javax.swing.JComboBox<>();
+        jComboBox_Brans = new javax.swing.JComboBox<>();
         jPanel12 = new javax.swing.JPanel();
-        jComboBox4 = new javax.swing.JComboBox<>();
-        jPanel9 = new javax.swing.JPanel();
-        jPanel14 = new javax.swing.JPanel();
+        jComboBox_MudurlukBaslamaYılı = new javax.swing.JComboBox<>();
+        jPanel_OgrenciEkBilgiler = new javax.swing.JPanel();
+        jPanel_DosyaOku = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jPanel15 = new javax.swing.JPanel();
-        jComboBox6 = new javax.swing.JComboBox<>();
+        jComboBox_OgrencilikBalamaYili = new javax.swing.JComboBox<>();
         jPanel_Okul = new javax.swing.JPanel();
         jPanel13 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -127,7 +145,7 @@ public class OBSUI extends javax.swing.JFrame {
         jTextArea1 = new javax.swing.JTextArea();
         jTextField6 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
-        jPanel_Ogretmen = new javax.swing.JPanel();
+        jPanel_Atama = new javax.swing.JPanel();
         jPanel17 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList<>();
@@ -261,23 +279,51 @@ public class OBSUI extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jPanel_MenuBar.setBackground(new java.awt.Color(188, 189, 220));
 
         jToggleButton_Okul.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/school.png"))); // NOI18N
-        jToggleButton_Okul.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton_OkulActionPerformed(evt);
+        jToggleButton_Okul.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jToggleButton_OkulİtemStateChanged(evt);
             }
         });
 
-        jToggleButton_Ogretmen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/teacher.png"))); // NOI18N
+        jToggleButton_Atama.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/teacher.png"))); // NOI18N
+        jToggleButton_Atama.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jToggleButton_AtamaİtemStateChanged(evt);
+            }
+        });
 
         jToggleButton_Sinif.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/classroom.png"))); // NOI18N
+        jToggleButton_Sinif.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jToggleButton_SinifİtemStateChanged(evt);
+            }
+        });
 
         jToggleButton_Sinav.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/exam.png"))); // NOI18N
+        jToggleButton_Sinav.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jToggleButton_SinavİtemStateChanged(evt);
+            }
+        });
 
         jToggleButton_Kullanici.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/addUser.png"))); // NOI18N
+        jToggleButton_Kullanici.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jToggleButton_KullaniciİtemStateChanged(evt);
+            }
+        });
+
+        jButton7.setText("<::");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel_MenuBarLayout = new javax.swing.GroupLayout(jPanel_MenuBar);
         jPanel_MenuBar.setLayout(jPanel_MenuBarLayout);
@@ -286,25 +332,29 @@ public class OBSUI extends javax.swing.JFrame {
             .addGroup(jPanel_MenuBarLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel_MenuBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jToggleButton_Kullanici, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(jPanel_MenuBarLayout.createSequentialGroup()
                         .addGroup(jPanel_MenuBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jToggleButton_Okul, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jToggleButton_Ogretmen, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jToggleButton_Atama, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jToggleButton_Sinif, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jToggleButton_Sinav, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jToggleButton_Kullanici, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_MenuBarLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jButton7))
         );
         jPanel_MenuBarLayout.setVerticalGroup(
             jPanel_MenuBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel_MenuBarLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton7)
+                .addGap(110, 110, 110)
                 .addComponent(jToggleButton_Kullanici, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jToggleButton_Okul, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jToggleButton_Ogretmen, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jToggleButton_Atama, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jToggleButton_Sinif, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -345,20 +395,20 @@ public class OBSUI extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(239, 237, 245));
 
-        jTextField1.setBackground(new java.awt.Color(239, 237, 245));
-        jTextField1.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), "Soy İsim", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
+        jTextField_SoyIsim.setBackground(new java.awt.Color(239, 237, 245));
+        jTextField_SoyIsim.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), "Soy İsim", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
 
-        jTextField2.setBackground(new java.awt.Color(239, 237, 245));
-        jTextField2.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), "Kullanici Adi", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
+        jTextField_KullaniciAdi.setBackground(new java.awt.Color(239, 237, 245));
+        jTextField_KullaniciAdi.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), "Kullanici Adi", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
 
-        jTextField3.setBackground(new java.awt.Color(239, 237, 245));
-        jTextField3.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), "Kullanici Sifre", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
+        jTextField_KullaniciSifre.setBackground(new java.awt.Color(239, 237, 245));
+        jTextField_KullaniciSifre.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), "Kullanici Sifre", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
 
-        jTextField4.setBackground(new java.awt.Color(239, 237, 245));
-        jTextField4.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), "E-Mail", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
+        jTextField_EMail.setBackground(new java.awt.Color(239, 237, 245));
+        jTextField_EMail.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), "E-Mail", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
 
-        jTextField5.setBackground(new java.awt.Color(239, 237, 245));
-        jTextField5.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), "İsim", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
+        jTextField_Isim.setBackground(new java.awt.Color(239, 237, 245));
+        jTextField_Isim.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), "İsim", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
 
         jButton_Yenile.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButton_Yenile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/refresh.png"))); // NOI18N
@@ -375,30 +425,30 @@ public class OBSUI extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap(58, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField_EMail, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField_KullaniciSifre, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField_KullaniciAdi, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField_SoyIsim, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField_Isim, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jButton_Yenile, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton_Kayit, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(108, Short.MAX_VALUE))
+                .addContainerGap(107, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextField_Isim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, Short.MAX_VALUE)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextField_SoyIsim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, Short.MAX_VALUE)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextField_KullaniciAdi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, Short.MAX_VALUE)
-                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextField_KullaniciSifre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, Short.MAX_VALUE)
-                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextField_EMail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jButton_Kayit, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -428,7 +478,7 @@ public class OBSUI extends javax.swing.JFrame {
         jPanel7.setBackground(new java.awt.Color(251, 252, 253));
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Role ve Yaş", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
 
-        jSpinner1.setModel(new javax.swing.SpinnerNumberModel(25, 5, 70, 1));
+        jSpinner_Yas.setModel(new javax.swing.SpinnerNumberModel(25, 5, 70, 1));
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -436,9 +486,9 @@ public class OBSUI extends javax.swing.JFrame {
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jComboBox_Role, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jSpinner_Yas, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
@@ -446,8 +496,8 @@ public class OBSUI extends javax.swing.JFrame {
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jComboBox1)
-                    .addComponent(jSpinner1))
+                    .addComponent(jComboBox_Role)
+                    .addComponent(jSpinner_Yas))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -456,7 +506,7 @@ public class OBSUI extends javax.swing.JFrame {
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap(35, Short.MAX_VALUE)
+                .addContainerGap(36, Short.MAX_VALUE)
                 .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap(36, Short.MAX_VALUE))
         );
@@ -472,14 +522,14 @@ public class OBSUI extends javax.swing.JFrame {
         jPanel6.setPreferredSize(new java.awt.Dimension(319, 247));
         jPanel6.setLayout(new java.awt.CardLayout());
 
-        jPanel8.setBackground(new java.awt.Color(251, 252, 253));
+        jPanel_OgretmenlikEkBilgiler.setBackground(new java.awt.Color(251, 252, 253));
 
         jPanel10.setBackground(new java.awt.Color(251, 252, 253));
         jPanel10.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Öğretmenlik  ve Puan", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1990", "1991", "1992", "1993", "1994", "1995", "1996", "1997", "1998", "1990", "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", " " }));
+        jComboBox_OgretmenlikBaslamaYili.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1990", "1991", "1992", "1993", "1994", "1995", "1996", "1997", "1998", "1990", "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", " " }));
 
-        jSpinner2.setModel(new javax.swing.SpinnerNumberModel(70, 0, 100, 1));
+        jSpinner_AtamaPuan.setModel(new javax.swing.SpinnerNumberModel(70, 0, 100, 1));
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
@@ -487,9 +537,9 @@ public class OBSUI extends javax.swing.JFrame {
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jComboBox_OgretmenlikBaslamaYili, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10)
-                .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jSpinner_AtamaPuan, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel10Layout.setVerticalGroup(
@@ -497,15 +547,15 @@ public class OBSUI extends javax.swing.JFrame {
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jComboBox2)
-                    .addComponent(jSpinner2))
+                    .addComponent(jComboBox_OgretmenlikBaslamaYili)
+                    .addComponent(jSpinner_AtamaPuan))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel11.setBackground(new java.awt.Color(251, 252, 253));
         jPanel11.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Branş", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Matematik", "Türkçe", "Ingilizce", "Almanca", "Bilgisayar" }));
+        jComboBox_Brans.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Matematik", "Türkçe", "Ingilizce", "Almanca", "Bilgisayar" }));
 
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
         jPanel11.setLayout(jPanel11Layout);
@@ -513,21 +563,21 @@ public class OBSUI extends javax.swing.JFrame {
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jComboBox_Brans, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel11Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jComboBox_Brans, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel12.setBackground(new java.awt.Color(251, 252, 253));
         jPanel12.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Okul Müdürü", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
 
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox_MudurlukBaslamaYılı.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
         jPanel12.setLayout(jPanel12Layout);
@@ -535,32 +585,32 @@ public class OBSUI extends javax.swing.JFrame {
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel12Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jComboBox_MudurlukBaslamaYılı, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel12Layout.setVerticalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel12Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jComboBox_MudurlukBaslamaYılı, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
-        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
-        jPanel8.setLayout(jPanel8Layout);
-        jPanel8Layout.setHorizontalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanel_OgretmenlikEkBilgilerLayout = new javax.swing.GroupLayout(jPanel_OgretmenlikEkBilgiler);
+        jPanel_OgretmenlikEkBilgiler.setLayout(jPanel_OgretmenlikEkBilgilerLayout);
+        jPanel_OgretmenlikEkBilgilerLayout.setHorizontalGroup(
+            jPanel_OgretmenlikEkBilgilerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_OgretmenlikEkBilgilerLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel_OgretmenlikEkBilgilerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel8Layout.setVerticalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
+        jPanel_OgretmenlikEkBilgilerLayout.setVerticalGroup(
+            jPanel_OgretmenlikEkBilgilerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_OgretmenlikEkBilgilerLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, Short.MAX_VALUE)
@@ -570,32 +620,32 @@ public class OBSUI extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel6.add(jPanel8, "card2");
+        jPanel6.add(jPanel_OgretmenlikEkBilgiler, "card2");
 
-        jPanel9.setBackground(new java.awt.Color(251, 252, 253));
+        jPanel_OgrenciEkBilgiler.setBackground(new java.awt.Color(251, 252, 253));
 
-        jPanel14.setBackground(new java.awt.Color(255, 204, 204));
+        jPanel_DosyaOku.setBackground(new java.awt.Color(255, 204, 204));
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/upload.png"))); // NOI18N
 
-        javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
-        jPanel14.setLayout(jPanel14Layout);
-        jPanel14Layout.setHorizontalGroup(
-            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel14Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanel_DosyaOkuLayout = new javax.swing.GroupLayout(jPanel_DosyaOku);
+        jPanel_DosyaOku.setLayout(jPanel_DosyaOkuLayout);
+        jPanel_DosyaOkuLayout.setHorizontalGroup(
+            jPanel_DosyaOkuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_DosyaOkuLayout.createSequentialGroup()
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
-        jPanel14Layout.setVerticalGroup(
-            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jPanel_DosyaOkuLayout.setVerticalGroup(
+            jPanel_DosyaOkuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
         );
 
         jPanel15.setBackground(new java.awt.Color(251, 252, 253));
         jPanel15.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Role ve Yaş", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
 
-        jComboBox6.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1990", "1991", "1992", "1993", "1994", "1995", "1996", "1997", "1998", "1990", "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023" }));
+        jComboBox_OgrencilikBalamaYili.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1990", "1991", "1992", "1993", "1994", "1995", "1996", "1997", "1998", "1990", "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023" }));
 
         javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
         jPanel15.setLayout(jPanel15Layout);
@@ -603,41 +653,41 @@ public class OBSUI extends javax.swing.JFrame {
             jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel15Layout.createSequentialGroup()
                 .addGap(49, 49, 49)
-                .addComponent(jComboBox6, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jComboBox_OgrencilikBalamaYili, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(42, 42, 42))
         );
         jPanel15Layout.setVerticalGroup(
             jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel15Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jComboBox6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jComboBox_OgrencilikBalamaYili, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
-        jPanel9.setLayout(jPanel9Layout);
-        jPanel9Layout.setHorizontalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel9Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanel_OgrenciEkBilgilerLayout = new javax.swing.GroupLayout(jPanel_OgrenciEkBilgiler);
+        jPanel_OgrenciEkBilgiler.setLayout(jPanel_OgrenciEkBilgilerLayout);
+        jPanel_OgrenciEkBilgilerLayout.setHorizontalGroup(
+            jPanel_OgrenciEkBilgilerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_OgrenciEkBilgilerLayout.createSequentialGroup()
                 .addContainerGap(36, Short.MAX_VALUE)
                 .addComponent(jPanel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap(35, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
+                .addContainerGap(36, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_OgrenciEkBilgilerLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel_DosyaOku, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel9Layout.setVerticalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
+        jPanel_OgrenciEkBilgilerLayout.setVerticalGroup(
+            jPanel_OgrenciEkBilgilerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_OgrenciEkBilgilerLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(64, 64, 64)
-                .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel_DosyaOku, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(128, Short.MAX_VALUE))
         );
 
-        jPanel6.add(jPanel9, "card3");
+        jPanel6.add(jPanel_OgrenciEkBilgiler, "card3");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -726,7 +776,7 @@ public class OBSUI extends javax.swing.JFrame {
             .addGroup(jPanel13Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 520, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 519, Short.MAX_VALUE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
@@ -751,11 +801,6 @@ public class OBSUI extends javax.swing.JFrame {
 
         jTextField6.setBackground(new java.awt.Color(239, 237, 245));
         jTextField6.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Okul İsmi", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
-        jTextField6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField6ActionPerformed(evt);
-            }
-        });
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/check.png"))); // NOI18N
 
@@ -770,7 +815,7 @@ public class OBSUI extends javax.swing.JFrame {
                     .addGroup(jPanel16Layout.createSequentialGroup()
                         .addGap(1, 1, 1)
                         .addComponent(jTextField6))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 241, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE))
                 .addGap(43, 43, 43))
         );
         jPanel16Layout.setVerticalGroup(
@@ -842,11 +887,6 @@ public class OBSUI extends javax.swing.JFrame {
         jButton2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/add.png"))); // NOI18N
         jButton2.setText("Ekle");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
 
         jButton3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/check.png"))); // NOI18N
@@ -859,7 +899,7 @@ public class OBSUI extends javax.swing.JFrame {
             .addGroup(jPanel17Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.DEFAULT_SIZE, 403, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.DEFAULT_SIZE, 404, Short.MAX_VALUE)
                     .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel17Layout.createSequentialGroup()
                         .addComponent(jButton2)
@@ -920,7 +960,7 @@ public class OBSUI extends javax.swing.JFrame {
             jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel18Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 413, Short.MAX_VALUE)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 412, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel18Layout.setVerticalGroup(
@@ -930,22 +970,22 @@ public class OBSUI extends javax.swing.JFrame {
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 456, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout jPanel_OgretmenLayout = new javax.swing.GroupLayout(jPanel_Ogretmen);
-        jPanel_Ogretmen.setLayout(jPanel_OgretmenLayout);
-        jPanel_OgretmenLayout.setHorizontalGroup(
-            jPanel_OgretmenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel_OgretmenLayout.createSequentialGroup()
+        javax.swing.GroupLayout jPanel_AtamaLayout = new javax.swing.GroupLayout(jPanel_Atama);
+        jPanel_Atama.setLayout(jPanel_AtamaLayout);
+        jPanel_AtamaLayout.setHorizontalGroup(
+            jPanel_AtamaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_AtamaLayout.createSequentialGroup()
                 .addComponent(jPanel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(0, 0, 0)
                 .addComponent(jPanel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel_OgretmenLayout.setVerticalGroup(
-            jPanel_OgretmenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jPanel_AtamaLayout.setVerticalGroup(
+            jPanel_AtamaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        jPanel_CardBody.add(jPanel_Ogretmen, "card4");
+        jPanel_CardBody.add(jPanel_Atama, "card4");
 
         jPanel20.setBackground(new java.awt.Color(239, 237, 245));
 
@@ -1113,7 +1153,7 @@ public class OBSUI extends javax.swing.JFrame {
         jPanel24Layout.setHorizontalGroup(
             jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel24Layout.createSequentialGroup()
-                .addContainerGap(65, Short.MAX_VALUE)
+                .addContainerGap(64, Short.MAX_VALUE)
                 .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jLabel11)
                     .addComponent(jLabel8)
@@ -1195,11 +1235,6 @@ public class OBSUI extends javax.swing.JFrame {
         jScrollPane7.setViewportView(jTextArea3);
 
         jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/check.png"))); // NOI18N
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
-            }
-        });
 
         jLabel29.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel29.setText("Cevaplar");
@@ -1781,7 +1816,7 @@ public class OBSUI extends javax.swing.JFrame {
                 .addGap(27, 27, 27)
                 .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jPanel31, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 342, Short.MAX_VALUE))
+                    .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 343, Short.MAX_VALUE))
                 .addGap(20, 20, 20))
         );
         jPanel19Layout.setVerticalGroup(
@@ -1843,11 +1878,6 @@ public class OBSUI extends javax.swing.JFrame {
         buttonGroup1.add(jRadioButton2);
         jRadioButton2.setText("Cevap B");
         jRadioButton2.setEnabled(false);
-        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton2ActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel27Layout = new javax.swing.GroupLayout(jPanel27);
         jPanel27.setLayout(jPanel27Layout);
@@ -1937,11 +1967,6 @@ public class OBSUI extends javax.swing.JFrame {
         jButton4.setMaximumSize(new java.awt.Dimension(32, 32));
         jButton4.setMinimumSize(new java.awt.Dimension(32, 32));
         jButton4.setPreferredSize(new java.awt.Dimension(32, 32));
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
 
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/rightArrow.png"))); // NOI18N
         jButton5.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -1967,7 +1992,7 @@ public class OBSUI extends javax.swing.JFrame {
                             .addComponent(jPanel28, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jPanel27, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jPanel26, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 367, Short.MAX_VALUE)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE)
                             .addComponent(jProgressBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jPanel29, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(24, 24, 24))))
@@ -2004,7 +2029,7 @@ public class OBSUI extends javax.swing.JFrame {
                 .addGap(25, 25, 25)
                 .addComponent(jPanel19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(0, 0, 0)
-                .addComponent(jPanel25, javax.swing.GroupLayout.DEFAULT_SIZE, 422, Short.MAX_VALUE)
+                .addComponent(jPanel25, javax.swing.GroupLayout.DEFAULT_SIZE, 421, Short.MAX_VALUE)
                 .addGap(28, 28, 28))
         );
         jPanel_SinavLayout.setVerticalGroup(
@@ -2080,31 +2105,32 @@ public class OBSUI extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jToggleButton_OkulActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton_OkulActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jToggleButton_OkulActionPerformed
+    private void jToggleButton_KullaniciİtemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jToggleButton_KullaniciİtemStateChanged
+        oBSEkranIslemleri.btnItemStateChanged(jToggleButton_Kullanici);
+    }//GEN-LAST:event_jToggleButton_KullaniciİtemStateChanged
 
-    private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField6ActionPerformed
+    private void jToggleButton_OkulİtemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jToggleButton_OkulİtemStateChanged
+        oBSEkranIslemleri.btnItemStateChanged(jToggleButton_Okul);
+    }//GEN-LAST:event_jToggleButton_OkulİtemStateChanged
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void jToggleButton_AtamaİtemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jToggleButton_AtamaİtemStateChanged
+        oBSEkranIslemleri.btnItemStateChanged(jToggleButton_Atama);
+    }//GEN-LAST:event_jToggleButton_AtamaİtemStateChanged
 
-    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton2ActionPerformed
+    private void jToggleButton_SinifİtemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jToggleButton_SinifİtemStateChanged
+        oBSEkranIslemleri.btnItemStateChanged(jToggleButton_Sinif);
+    }//GEN-LAST:event_jToggleButton_SinifİtemStateChanged
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+    private void jToggleButton_SinavİtemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jToggleButton_SinavİtemStateChanged
+        oBSEkranIslemleri.btnItemStateChanged(jToggleButton_Sinav);
+    }//GEN-LAST:event_jToggleButton_SinavİtemStateChanged
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton6ActionPerformed
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+       jPanel_MenuBar.setSize(0, jPanel_MenuBar.getHeight());
+    }//GEN-LAST:event_jButton7ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -2159,13 +2185,14 @@ public class OBSUI extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton_Kayit;
     private javax.swing.JButton jButton_Yenile;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
-    private javax.swing.JComboBox<String> jComboBox4;
-    private javax.swing.JComboBox<String> jComboBox6;
+    private javax.swing.JComboBox<String> jComboBox_Brans;
+    private javax.swing.JComboBox<String> jComboBox_MudurlukBaslamaYılı;
+    private javax.swing.JComboBox<String> jComboBox_OgrencilikBalamaYili;
+    private javax.swing.JComboBox<String> jComboBox_OgretmenlikBaslamaYili;
+    private javax.swing.JComboBox<String> jComboBox_Role;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -2215,7 +2242,6 @@ public class OBSUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
-    private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel17;
@@ -2250,16 +2276,17 @@ public class OBSUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel9;
     private javax.swing.JPanel jPanel_AnaPanel;
+    private javax.swing.JPanel jPanel_Atama;
     private javax.swing.JPanel jPanel_CardBody;
+    private javax.swing.JPanel jPanel_DosyaOku;
     private javax.swing.JPanel jPanel_Footer;
     private javax.swing.JPanel jPanel_Header1;
     private javax.swing.JPanel jPanel_Header2;
     private javax.swing.JPanel jPanel_Kullanici;
     private javax.swing.JPanel jPanel_MenuBar;
-    private javax.swing.JPanel jPanel_Ogretmen;
+    private javax.swing.JPanel jPanel_OgrenciEkBilgiler;
+    private javax.swing.JPanel jPanel_OgretmenlikEkBilgiler;
     private javax.swing.JPanel jPanel_Okul;
     private javax.swing.JPanel jPanel_Sinav;
     private javax.swing.JPanel jPanel_Sinif;
@@ -2316,22 +2343,22 @@ public class OBSUI extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
-    private javax.swing.JSpinner jSpinner1;
-    private javax.swing.JSpinner jSpinner2;
+    private javax.swing.JSpinner jSpinner_AtamaPuan;
+    private javax.swing.JSpinner jSpinner_Yas;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable3;
     private javax.swing.JTable jTable4;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextArea2;
     private javax.swing.JTextArea jTextArea3;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
+    private javax.swing.JTextField jTextField_EMail;
+    private javax.swing.JTextField jTextField_Isim;
+    private javax.swing.JTextField jTextField_KullaniciAdi;
+    private javax.swing.JTextField jTextField_KullaniciSifre;
+    private javax.swing.JTextField jTextField_SoyIsim;
+    private javax.swing.JToggleButton jToggleButton_Atama;
     private javax.swing.JToggleButton jToggleButton_Kullanici;
-    private javax.swing.JToggleButton jToggleButton_Ogretmen;
     private javax.swing.JToggleButton jToggleButton_Okul;
     private javax.swing.JToggleButton jToggleButton_Sinav;
     private javax.swing.JToggleButton jToggleButton_Sinif;

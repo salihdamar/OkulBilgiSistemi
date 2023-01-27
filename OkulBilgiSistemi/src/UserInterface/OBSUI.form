@@ -27,10 +27,13 @@
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+      <Color id="Default Cursor"/>
+    </Property>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
-    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="true"/>
   </SyntheticProperties>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
@@ -68,7 +71,7 @@
               <Component id="jPanel_Header1" max="32767" attributes="0"/>
               <Group type="102" attributes="0">
                   <Component id="jPanel_MenuBar" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jPanel_Header2" max="32767" attributes="0"/>
                       <Component id="jPanel_CardBody" max="32767" attributes="0"/>
@@ -110,30 +113,35 @@
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jToggleButton_Kullanici" alignment="0" pref="0" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jToggleButton_Okul" min="-2" pref="76" max="-2" attributes="0"/>
-                                  <Component id="jToggleButton_Ogretmen" alignment="0" min="-2" pref="76" max="-2" attributes="0"/>
+                                  <Component id="jToggleButton_Atama" alignment="0" min="-2" pref="76" max="-2" attributes="0"/>
                                   <Component id="jToggleButton_Sinif" alignment="0" min="-2" pref="76" max="-2" attributes="0"/>
                                   <Component id="jToggleButton_Sinav" alignment="0" min="-2" pref="76" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
-                          <Component id="jToggleButton_Kullanici" alignment="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Component id="jButton7" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="jButton7" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="110" max="-2" attributes="0"/>
                       <Component id="jToggleButton_Kullanici" min="-2" pref="51" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jToggleButton_Okul" min="-2" pref="51" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="jToggleButton_Ogretmen" min="-2" pref="51" max="-2" attributes="0"/>
+                      <Component id="jToggleButton_Atama" min="-2" pref="51" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jToggleButton_Sinif" min="-2" pref="52" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -151,15 +159,18 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jToggleButton_OkulActionPerformed"/>
+                <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jToggleButton_Okul&#x130;temStateChanged"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JToggleButton" name="jToggleButton_Ogretmen">
+            <Component class="javax.swing.JToggleButton" name="jToggleButton_Atama">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/Image/teacher.png"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jToggleButton_Atama&#x130;temStateChanged"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JToggleButton" name="jToggleButton_Sinif">
               <Properties>
@@ -167,6 +178,9 @@
                   <Image iconType="3" name="/Image/classroom.png"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jToggleButton_Sinif&#x130;temStateChanged"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JToggleButton" name="jToggleButton_Sinav">
               <Properties>
@@ -174,6 +188,9 @@
                   <Image iconType="3" name="/Image/exam.png"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jToggleButton_Sinav&#x130;temStateChanged"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JToggleButton" name="jToggleButton_Kullanici">
               <Properties>
@@ -181,6 +198,17 @@
                   <Image iconType="3" name="/Image/addUser.png"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jToggleButton_Kullanici&#x130;temStateChanged"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="jButton7">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="&lt;::"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton7ActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -294,18 +322,18 @@
                               <Group type="102" attributes="0">
                                   <EmptySpace pref="58" max="32767" attributes="0"/>
                                   <Group type="103" groupAlignment="2" attributes="0">
-                                      <Component id="jTextField4" alignment="2" min="-2" pref="271" max="-2" attributes="0"/>
-                                      <Component id="jTextField3" alignment="2" min="-2" pref="271" max="-2" attributes="0"/>
-                                      <Component id="jTextField2" alignment="2" min="-2" pref="271" max="-2" attributes="0"/>
-                                      <Component id="jTextField1" alignment="2" min="-2" pref="271" max="-2" attributes="0"/>
-                                      <Component id="jTextField5" alignment="2" min="-2" pref="271" max="-2" attributes="0"/>
+                                      <Component id="jTextField_EMail" alignment="2" min="-2" pref="271" max="-2" attributes="0"/>
+                                      <Component id="jTextField_KullaniciSifre" alignment="2" min="-2" pref="271" max="-2" attributes="0"/>
+                                      <Component id="jTextField_KullaniciAdi" alignment="2" min="-2" pref="271" max="-2" attributes="0"/>
+                                      <Component id="jTextField_SoyIsim" alignment="2" min="-2" pref="271" max="-2" attributes="0"/>
+                                      <Component id="jTextField_Isim" alignment="2" min="-2" pref="271" max="-2" attributes="0"/>
                                       <Group type="102" alignment="2" attributes="0">
                                           <Component id="jButton_Yenile" min="-2" pref="100" max="-2" attributes="0"/>
                                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                           <Component id="jButton_Kayit" min="-2" pref="100" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
-                                  <EmptySpace pref="108" max="32767" attributes="0"/>
+                                  <EmptySpace pref="107" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -313,15 +341,15 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace max="32767" attributes="0"/>
-                                  <Component id="jTextField5" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jTextField_Isim" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="32767" attributes="0"/>
-                                  <Component id="jTextField1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jTextField_SoyIsim" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="32767" attributes="0"/>
-                                  <Component id="jTextField2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jTextField_KullaniciAdi" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="32767" attributes="0"/>
-                                  <Component id="jTextField3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jTextField_KullaniciSifre" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="32767" attributes="0"/>
-                                  <Component id="jTextField4" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jTextField_EMail" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="32767" attributes="0"/>
                                   <Group type="103" groupAlignment="2" attributes="0">
                                       <Component id="jButton_Kayit" alignment="2" min="-2" pref="39" max="-2" attributes="0"/>
@@ -333,7 +361,7 @@
                         </DimensionLayout>
                       </Layout>
                       <SubComponents>
-                        <Component class="javax.swing.JTextField" name="jTextField1">
+                        <Component class="javax.swing.JTextField" name="jTextField_SoyIsim">
                           <Properties>
                             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                               <Color blue="f5" green="ed" red="ef" type="rgb"/>
@@ -350,7 +378,7 @@
                             </Property>
                           </Properties>
                         </Component>
-                        <Component class="javax.swing.JTextField" name="jTextField2">
+                        <Component class="javax.swing.JTextField" name="jTextField_KullaniciAdi">
                           <Properties>
                             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                               <Color blue="f5" green="ed" red="ef" type="rgb"/>
@@ -367,7 +395,7 @@
                             </Property>
                           </Properties>
                         </Component>
-                        <Component class="javax.swing.JTextField" name="jTextField3">
+                        <Component class="javax.swing.JTextField" name="jTextField_KullaniciSifre">
                           <Properties>
                             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                               <Color blue="f5" green="ed" red="ef" type="rgb"/>
@@ -384,7 +412,7 @@
                             </Property>
                           </Properties>
                         </Component>
-                        <Component class="javax.swing.JTextField" name="jTextField4">
+                        <Component class="javax.swing.JTextField" name="jTextField_EMail">
                           <Properties>
                             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                               <Color blue="f5" green="ed" red="ef" type="rgb"/>
@@ -401,7 +429,7 @@
                             </Property>
                           </Properties>
                         </Component>
-                        <Component class="javax.swing.JTextField" name="jTextField5">
+                        <Component class="javax.swing.JTextField" name="jTextField_Isim">
                           <Properties>
                             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                               <Color blue="f5" green="ed" red="ef" type="rgb"/>
@@ -503,7 +531,7 @@
                             <DimensionLayout dim="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
-                                      <EmptySpace pref="35" max="32767" attributes="0"/>
+                                      <EmptySpace pref="36" max="32767" attributes="0"/>
                                       <Component id="jPanel7" max="32767" attributes="0"/>
                                       <EmptySpace pref="36" max="32767" attributes="0"/>
                                   </Group>
@@ -542,9 +570,9 @@
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" alignment="0" attributes="0">
                                           <EmptySpace max="32767" attributes="0"/>
-                                          <Component id="jComboBox1" min="-2" pref="194" max="-2" attributes="0"/>
+                                          <Component id="jComboBox_Role" min="-2" pref="194" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="jSpinner1" min="-2" pref="60" max="-2" attributes="0"/>
+                                          <Component id="jSpinner_Yas" min="-2" pref="60" max="-2" attributes="0"/>
                                           <EmptySpace max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
@@ -554,8 +582,8 @@
                                       <Group type="102" alignment="0" attributes="0">
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                              <Component id="jComboBox1" max="32767" attributes="0"/>
-                                              <Component id="jSpinner1" max="32767" attributes="0"/>
+                                              <Component id="jComboBox_Role" max="32767" attributes="0"/>
+                                              <Component id="jSpinner_Yas" max="32767" attributes="0"/>
                                           </Group>
                                           <EmptySpace max="32767" attributes="0"/>
                                       </Group>
@@ -563,7 +591,7 @@
                                 </DimensionLayout>
                               </Layout>
                               <SubComponents>
-                                <Component class="javax.swing.JComboBox" name="jComboBox1">
+                                <Component class="javax.swing.JComboBox" name="jComboBox_Role">
                                   <Properties>
                                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                                       <StringArray count="0"/>
@@ -573,7 +601,7 @@
                                     <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                                   </AuxValues>
                                 </Component>
-                                <Component class="javax.swing.JSpinner" name="jSpinner1">
+                                <Component class="javax.swing.JSpinner" name="jSpinner_Yas">
                                   <Properties>
                                     <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
                                       <SpinnerModel initial="25" maximum="70" minimum="5" numberType="java.lang.Integer" stepSize="1" type="number"/>
@@ -596,7 +624,7 @@
 
                           <Layout class="org.netbeans.modules.form.compat2.layouts.DesignCardLayout"/>
                           <SubComponents>
-                            <Container class="javax.swing.JPanel" name="jPanel8">
+                            <Container class="javax.swing.JPanel" name="jPanel_OgretmenlikEkBilgiler">
                               <Properties>
                                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                                   <Color blue="fd" green="fc" red="fb" type="rgb"/>
@@ -659,9 +687,9 @@
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="102" alignment="0" attributes="0">
                                               <EmptySpace max="32767" attributes="0"/>
-                                              <Component id="jComboBox2" min="-2" pref="194" max="-2" attributes="0"/>
+                                              <Component id="jComboBox_OgretmenlikBaslamaYili" min="-2" pref="194" max="-2" attributes="0"/>
                                               <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                                              <Component id="jSpinner2" min="-2" pref="60" max="-2" attributes="0"/>
+                                              <Component id="jSpinner_AtamaPuan" min="-2" pref="60" max="-2" attributes="0"/>
                                               <EmptySpace max="32767" attributes="0"/>
                                           </Group>
                                       </Group>
@@ -671,8 +699,8 @@
                                           <Group type="102" alignment="0" attributes="0">
                                               <EmptySpace max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                  <Component id="jComboBox2" alignment="0" max="32767" attributes="0"/>
-                                                  <Component id="jSpinner2" alignment="0" max="32767" attributes="0"/>
+                                                  <Component id="jComboBox_OgretmenlikBaslamaYili" alignment="0" max="32767" attributes="0"/>
+                                                  <Component id="jSpinner_AtamaPuan" alignment="0" max="32767" attributes="0"/>
                                               </Group>
                                               <EmptySpace max="32767" attributes="0"/>
                                           </Group>
@@ -680,7 +708,7 @@
                                     </DimensionLayout>
                                   </Layout>
                                   <SubComponents>
-                                    <Component class="javax.swing.JComboBox" name="jComboBox2">
+                                    <Component class="javax.swing.JComboBox" name="jComboBox_OgretmenlikBaslamaYili">
                                       <Properties>
                                         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                                           <StringArray count="35">
@@ -726,7 +754,7 @@
                                         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                                       </AuxValues>
                                     </Component>
-                                    <Component class="javax.swing.JSpinner" name="jSpinner2">
+                                    <Component class="javax.swing.JSpinner" name="jSpinner_AtamaPuan">
                                       <Properties>
                                         <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
                                           <SpinnerModel initial="70" maximum="100" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
@@ -757,7 +785,7 @@
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="102" alignment="1" attributes="0">
                                               <EmptySpace max="32767" attributes="0"/>
-                                              <Component id="jComboBox3" min="-2" pref="240" max="-2" attributes="0"/>
+                                              <Component id="jComboBox_Brans" min="-2" pref="240" max="-2" attributes="0"/>
                                               <EmptySpace max="32767" attributes="0"/>
                                           </Group>
                                       </Group>
@@ -766,14 +794,14 @@
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="102" alignment="0" attributes="0">
                                               <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="jComboBox3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jComboBox_Brans" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace max="32767" attributes="0"/>
                                           </Group>
                                       </Group>
                                     </DimensionLayout>
                                   </Layout>
                                   <SubComponents>
-                                    <Component class="javax.swing.JComboBox" name="jComboBox3">
+                                    <Component class="javax.swing.JComboBox" name="jComboBox_Brans">
                                       <Properties>
                                         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                                           <StringArray count="5">
@@ -813,7 +841,7 @@
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="102" alignment="1" attributes="0">
                                               <EmptySpace max="32767" attributes="0"/>
-                                              <Component id="jComboBox4" min="-2" pref="240" max="-2" attributes="0"/>
+                                              <Component id="jComboBox_MudurlukBaslamaYılı" min="-2" pref="240" max="-2" attributes="0"/>
                                               <EmptySpace max="32767" attributes="0"/>
                                           </Group>
                                       </Group>
@@ -822,14 +850,14 @@
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="102" alignment="1" attributes="0">
                                               <EmptySpace max="32767" attributes="0"/>
-                                              <Component id="jComboBox4" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jComboBox_MudurlukBaslamaYılı" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
                                     </DimensionLayout>
                                   </Layout>
                                   <SubComponents>
-                                    <Component class="javax.swing.JComboBox" name="jComboBox4">
+                                    <Component class="javax.swing.JComboBox" name="jComboBox_MudurlukBaslamaY&#x131;l&#x131;">
                                       <Properties>
                                         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                                           <StringArray count="4">
@@ -848,7 +876,7 @@
                                 </Container>
                               </SubComponents>
                             </Container>
-                            <Container class="javax.swing.JPanel" name="jPanel9">
+                            <Container class="javax.swing.JPanel" name="jPanel_OgrenciEkBilgiler">
                               <Properties>
                                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                                   <Color blue="fd" green="fc" red="fb" type="rgb"/>
@@ -866,11 +894,11 @@
                                       <Group type="102" alignment="0" attributes="0">
                                           <EmptySpace pref="36" max="32767" attributes="0"/>
                                           <Component id="jPanel15" max="32767" attributes="0"/>
-                                          <EmptySpace pref="35" max="32767" attributes="0"/>
+                                          <EmptySpace pref="36" max="32767" attributes="0"/>
                                       </Group>
                                       <Group type="102" alignment="1" attributes="0">
                                           <EmptySpace max="32767" attributes="0"/>
-                                          <Component id="jPanel14" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jPanel_DosyaOku" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
@@ -881,14 +909,14 @@
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Component id="jPanel15" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
-                                          <Component id="jPanel14" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jPanel_DosyaOku" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace pref="128" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                                 </DimensionLayout>
                               </Layout>
                               <SubComponents>
-                                <Container class="javax.swing.JPanel" name="jPanel14">
+                                <Container class="javax.swing.JPanel" name="jPanel_DosyaOku">
                                   <Properties>
                                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                                       <Color blue="cc" green="cc" red="ff" type="rgb"/>
@@ -943,7 +971,7 @@
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="102" alignment="0" attributes="0">
                                               <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
-                                              <Component id="jComboBox6" min="-2" pref="194" max="-2" attributes="0"/>
+                                              <Component id="jComboBox_OgrencilikBalamaYili" min="-2" pref="194" max="-2" attributes="0"/>
                                               <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
@@ -952,14 +980,14 @@
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="102" alignment="0" attributes="0">
                                               <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="jComboBox6" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jComboBox_OgrencilikBalamaYili" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace max="32767" attributes="0"/>
                                           </Group>
                                       </Group>
                                     </DimensionLayout>
                                   </Layout>
                                   <SubComponents>
-                                    <Component class="javax.swing.JComboBox" name="jComboBox6">
+                                    <Component class="javax.swing.JComboBox" name="jComboBox_OgrencilikBalamaYili">
                                       <Properties>
                                         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                                           <StringArray count="34">
@@ -1054,7 +1082,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="2" attributes="0">
-                                  <Component id="jScrollPane1" alignment="2" pref="520" max="32767" attributes="0"/>
+                                  <Component id="jScrollPane1" alignment="2" pref="519" max="32767" attributes="0"/>
                                   <Component id="jLabel3" alignment="2" min="-2" pref="256" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
@@ -1164,7 +1192,7 @@
                                       <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
                                       <Component id="jTextField6" max="32767" attributes="0"/>
                                   </Group>
-                                  <Component id="jScrollPane2" alignment="2" pref="241" max="32767" attributes="0"/>
+                                  <Component id="jScrollPane2" alignment="2" pref="242" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
                           </Group>
@@ -1222,9 +1250,6 @@
                           </Border>
                         </Property>
                       </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField6ActionPerformed"/>
-                      </Events>
                     </Component>
                     <Component class="javax.swing.JButton" name="jButton1">
                       <Properties>
@@ -1237,7 +1262,7 @@
                 </Container>
               </SubComponents>
             </Container>
-            <Container class="javax.swing.JPanel" name="jPanel_Ogretmen">
+            <Container class="javax.swing.JPanel" name="jPanel_Atama">
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
                   <CardConstraints cardName="card4"/>
@@ -1275,7 +1300,7 @@
                           <Group type="102" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jScrollPane3" alignment="2" pref="403" max="32767" attributes="0"/>
+                                  <Component id="jScrollPane3" alignment="2" pref="404" max="32767" attributes="0"/>
                                   <Component id="jScrollPane5" alignment="2" pref="0" max="32767" attributes="0"/>
                                   <Group type="102" alignment="1" attributes="0">
                                       <Component id="jButton2" min="-2" max="-2" attributes="0"/>
@@ -1402,9 +1427,6 @@
                         </Property>
                         <Property name="text" type="java.lang.String" value="Ekle"/>
                       </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
-                      </Events>
                     </Component>
                     <Component class="javax.swing.JButton" name="jButton3">
                       <Properties>
@@ -1431,7 +1453,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jScrollPane6" pref="413" max="32767" attributes="0"/>
+                              <Component id="jScrollPane6" pref="412" max="32767" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -1825,7 +1847,7 @@
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
-                                  <EmptySpace pref="65" max="32767" attributes="0"/>
+                                  <EmptySpace pref="64" max="32767" attributes="0"/>
                                   <Group type="103" groupAlignment="2" attributes="0">
                                       <Component id="jLabel11" alignment="2" min="-2" max="-2" attributes="0"/>
                                       <Component id="jLabel8" alignment="2" min="-2" max="-2" attributes="0"/>
@@ -1921,7 +1943,7 @@
                           <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                           <Component id="jPanel19" max="32767" attributes="0"/>
                           <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
-                          <Component id="jPanel25" pref="422" max="32767" attributes="0"/>
+                          <Component id="jPanel25" pref="421" max="32767" attributes="0"/>
                           <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -1966,7 +1988,7 @@
                               <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="2" attributes="0">
                                   <Component id="jPanel31" alignment="2" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jScrollPane7" alignment="2" pref="342" max="32767" attributes="0"/>
+                                  <Component id="jScrollPane7" alignment="2" pref="343" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                           </Group>
@@ -2055,9 +2077,6 @@
                           <Image iconType="3" name="/Image/check.png"/>
                         </Property>
                       </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton6ActionPerformed"/>
-                      </Events>
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel29">
                       <Properties>
@@ -3167,7 +3186,7 @@
                                           <Component id="jPanel28" alignment="0" max="32767" attributes="0"/>
                                           <Component id="jPanel27" alignment="1" max="32767" attributes="0"/>
                                           <Component id="jPanel26" alignment="1" max="32767" attributes="0"/>
-                                          <Component id="jScrollPane4" alignment="1" pref="367" max="32767" attributes="0"/>
+                                          <Component id="jScrollPane4" alignment="1" pref="366" max="32767" attributes="0"/>
                                           <Component id="jProgressBar1" alignment="1" max="32767" attributes="0"/>
                                           <Component id="jPanel29" alignment="0" max="32767" attributes="0"/>
                                       </Group>
@@ -3295,9 +3314,6 @@
                             <Property name="text" type="java.lang.String" value="Cevap B"/>
                             <Property name="enabled" type="boolean" value="false"/>
                           </Properties>
-                          <Events>
-                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jRadioButton2ActionPerformed"/>
-                          </Events>
                         </Component>
                       </SubComponents>
                     </Container>
@@ -3427,9 +3443,6 @@
                           <Dimension value="[32, 32]"/>
                         </Property>
                       </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton4ActionPerformed"/>
-                      </Events>
                     </Component>
                     <Component class="javax.swing.JButton" name="jButton5">
                       <Properties>
